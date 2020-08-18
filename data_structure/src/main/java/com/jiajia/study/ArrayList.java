@@ -1,5 +1,7 @@
 package com.jiajia.study;
 
+import java.util.Arrays;
+
 /**
  * @Author zjiajia
  * @Date 2020/8/17 16:08
@@ -96,11 +98,18 @@ public class ArrayList  {
 
     /**
      * 往index 处添加元素
-     * @param index
-     * @param element
+     * @param index     索引位置
+     * @param element   添加的元素
      */
     public void add(int index,int element){
-
+        if(index < 0 || index > size){
+            throw new IndexOutOfBoundsException("数组索引越界：index：" + index + ",size:" + size);
+        }
+        for (int i = size; i > index + 1; i--) {
+            elements[i] = elements[i-1];
+        }
+        elements[index] = element;
+        size++;
     }
 
     /**
@@ -117,6 +126,7 @@ public class ArrayList  {
         for (int i = index-1; i <= size - 1; i++) {
             elements[i-1] = elements[i];
         }
+        size--;
         return old;
     }
 
@@ -139,5 +149,13 @@ public class ArrayList  {
      */
     public void clear(){
         size = 0;
+    }
+
+    @Override
+    public String toString() {
+        return "ArrayList{" +
+                "size=" + size +
+                ", elements=" + Arrays.toString(elements) +
+                '}';
     }
 }
