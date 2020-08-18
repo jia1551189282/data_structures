@@ -65,8 +65,10 @@ public class ArrayList  {
      * @param element
      */
     public void add(int element){
-            elements[size] = element;
-            size++;
+          /*  elements[size] = element;
+            size++;*/
+          // 用已有方法处理
+        add(size,element);
     }
 
     /**
