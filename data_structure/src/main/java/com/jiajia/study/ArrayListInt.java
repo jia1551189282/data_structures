@@ -1,15 +1,12 @@
 package com.jiajia.study;
 
-
-
 import java.util.Arrays;
-
 
 /**
  * @Author zjiajia
  * @Date 2020/8/17 16:08
  */
-public class ArrayList<E>  {
+public class ArrayListInt {
     /**
      * 元素的数量
      */
@@ -17,7 +14,7 @@ public class ArrayList<E>  {
     /**
      * 所有的元素
      */
-    private E[] elements;
+    private int[] elements;
     /**
      * 默认初始化容量大小
      */
@@ -28,13 +25,13 @@ public class ArrayList<E>  {
     private static final int ELELMENT_NOT_FOUND = -1;
 
 
-    public ArrayList(int capacity){
+    public ArrayListInt(int capacity){
         // 如果传入的容量小于 默认给的容量，就以默认容量为准
         capacity = (capacity < DEFAULT_CAPACIFY) ? DEFAULT_CAPACIFY : capacity;
-        elements = (E[]) new Object[capacity];
+        elements = new int[capacity];
     }
 
-    public ArrayList(){
+    public ArrayListInt(){
         this(DEFAULT_CAPACIFY);
     }
 
@@ -59,7 +56,7 @@ public class ArrayList<E>  {
      * @param element
      * @return
      */
-    public boolean contains(E element){
+    public boolean contains(int element){
         return indexOf(element) == ELELMENT_NOT_FOUND;
     }
 
@@ -67,7 +64,7 @@ public class ArrayList<E>  {
      * 添加一个元素到 最后面
      * @param element 添加的元素
      */
-    public void add(E element){
+    public void add(int element){
           /*  elements[size] = element;
             size++;*/
           // 用已有方法处理
@@ -79,7 +76,7 @@ public class ArrayList<E>  {
      * @param index
      * @return
      */
-    public E get(int index){
+    public int get(int index){
         if(index < 0 || index >= size){
             throw new IndexOutOfBoundsException("数组索引越界：index：" + index + ",size:" + size);
         }
@@ -92,11 +89,11 @@ public class ArrayList<E>  {
      * @param element
      * @return
      */
-    public E set(int index,E element){
+    public int set(int index,int element){
         if(index < 0 || index >= size){
             throw new IndexOutOfBoundsException("数组索引越界：index：" + index + ",size:" + size);
         }
-        E old = elements[index];
+        int old = elements[index];
         elements[index] = element;
         return old;
     }
@@ -106,12 +103,12 @@ public class ArrayList<E>  {
      * @param index     索引位置
      * @param element   添加的元素
      */
-    public void add(int index,E element){
+    public void add(int index,int element){
 
-       /* if(index < 0 || index > size){
+        if(index < 0 || index > size){
             throw new IndexOutOfBoundsException("数组索引越界：index：" + index + ",size:" + size);
         }
-*/      rangeCheckOfAdd(index);
+
         ensureCapacity(size + 1);
 
         for (int i = size; i > index + 1; i--) {
@@ -128,13 +125,12 @@ public class ArrayList<E>  {
      * @param index
      * @return
      */
-    public E remove(int index){
-        /*if(index < 0 || index >= size){
+    public int remove(int index){
+        if(index < 0 || index >= size){
             throw new IndexOutOfBoundsException("数组索引越界：index：" + index + ",size:" + size);
         }
-*/
-        rangeCheck(index);
-        E old = elements[index];
+
+        int old = elements[index];
         for (int i = index-1; i <= size - 1; i++) {
             elements[i-1] = elements[i];
         }
@@ -147,7 +143,7 @@ public class ArrayList<E>  {
      * @param element
      * @return
      */
-    public int indexOf(E element){
+    public int indexOf(int element){
         for (int i = 0; i < size; i++) {
             if(elements[i] == element){
                 return i;
@@ -160,10 +156,6 @@ public class ArrayList<E>  {
      * 清除所有的元素
      */
     public void clear(){
-        // 清除  数组中存放的 对象的内存
-        for (int i = 0; i < size; i++) {
-            elements[i] = null;
-        }
         size = 0;
     }
 
@@ -182,12 +174,12 @@ public class ArrayList<E>  {
      */
     private void ensureCapacity(int capacity) {
         int oldCapacity = elements.length;
-        if(capacity <= oldCapacity){
-            return ;
+        if(capacity <= oldCapacity) {
+            return;
         }
         // 扩容为原来的 1.5 倍
         int newCapacity = oldCapacity + oldCapacity >> 1 ;
-        E[] newElements = (E[]) new Object[newCapacity];
+        int[] newElements = new int[newCapacity];
         for (int i = 0; i < size; i++) {
             newElements[i] = elements[i];
         }
