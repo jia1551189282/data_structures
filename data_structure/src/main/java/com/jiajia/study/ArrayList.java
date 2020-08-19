@@ -62,7 +62,7 @@ public class ArrayList  {
 
     /**
      * 添加一个元素到 最后面
-     * @param element
+     * @param element 添加的元素
      */
     public void add(int element){
           /*  elements[size] = element;
@@ -104,15 +104,21 @@ public class ArrayList  {
      * @param element   添加的元素
      */
     public void add(int index,int element){
+
         if(index < 0 || index > size){
             throw new IndexOutOfBoundsException("数组索引越界：index：" + index + ",size:" + size);
         }
+
+        ensureCapacity(size + 1);
+
         for (int i = size; i > index + 1; i--) {
             elements[i] = elements[i-1];
         }
         elements[index] = element;
         size++;
     }
+
+
 
     /**
      * 删除index处的元素
@@ -159,5 +165,51 @@ public class ArrayList  {
                 "size=" + size +
                 ", elements=" + Arrays.toString(elements) +
                 '}';
+    }
+
+
+    /**
+     * 确保容量，容量不够的时候，就对数组扩容，每次扩容为原来的1.5倍
+     * @param capacity
+     */
+    private void ensureCapacity(int capacity) {
+        if(capacity <= DEFAULT_CAPACIFY){
+            return ;
+        }
+        // 扩容为原来的 1.5 倍
+        Integer newCapacity = size + size >> 1 ;
+        int[] newElements = new int[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elements[i];
+        }
+        elements = newElements;
+    }
+
+    /**
+     * 索引 检查
+     * @param index 索引值
+     */
+    private void rangeCheck(int index){
+        if(index < 0 || index >= size){
+            outOfRange(index);
+        }
+    }
+
+    /**
+     * 添加的索引检查
+     * @param index 索引值
+     */
+    private void rangeCheckOfAdd(int index){
+        if(index < 0 || index > size){
+            outOfRange(index);
+        }
+    }
+
+    /**
+     * 抛出索引异常
+     * @param index  索引值
+     */
+    public void outOfRange(int index){
+        throw new IndexOutOfBoundsException("数组索引越界：index：" + index + ",size:" + size);
     }
 }
