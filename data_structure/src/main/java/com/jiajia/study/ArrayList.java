@@ -139,6 +139,7 @@ public class ArrayList<E>  {
             elements[i-1] = elements[i];
         }
         size--;
+        elements[size] = null;
         return old;
     }
 
@@ -149,7 +150,7 @@ public class ArrayList<E>  {
      */
     public int indexOf(E element){
         for (int i = 0; i < size; i++) {
-            if(elements[i] == element){
+            if(elements[i] .equals(element) ){
                 return i;
             }
         }
