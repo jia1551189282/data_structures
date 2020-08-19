@@ -149,9 +149,19 @@ public class ArrayList<E>  {
      * @return
      */
     public int indexOf(E element){
-        for (int i = 0; i < size; i++) {
-            if(elements[i] .equals(element) ){
-                return i;
+        // 对null 进行特殊处理
+        if(element == null){
+            for (int i = 0; i < size; i++) {
+                if(elements[i] == null ) {
+                    return i;
+                }
+            }
+        }else{
+
+            for (int i = 0; i < size; i++) {
+                if(elements[i] .equals(element) ){
+                    return i;
+                }
             }
         }
         return ELELMENT_NOT_FOUND;
