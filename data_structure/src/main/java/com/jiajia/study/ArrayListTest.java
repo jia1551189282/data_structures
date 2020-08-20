@@ -52,5 +52,6 @@ public class ArrayListTest {
 
         System.out.println(personArrayList);
 
+
     }
 }
