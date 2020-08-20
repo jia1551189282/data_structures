@@ -28,31 +28,70 @@ public class LinkedList<E> extends AbstractList<E> {
 
     @Override
     public void clear() {
-
+        size = 0 ;
+        first = null;
     }
 
     @Override
     public E get(int index) {
-        return null;
+        return node(index).element;
     }
 
     @Override
     public E set(int index, E element) {
-        return null;
+
+        Node<E> node = node(index);
+        E oldElement = node.element;
+        node.element = element;
+        return oldElement;
     }
 
     @Override
     public void add(int index, E element) {
-
+        // 头节点 特殊处理
+        if(index == 0){
+            first = new Node<E>(element,first.next);
+        }else{
+            Node<E> preNode = node(index - 1);
+            Node<E> node = new Node<>(element,preNode.next);
+            preNode.next = node;
+        }
+        size++ ;
     }
 
     @Override
     public E remove(int index) {
-        return null;
+        Node<E> oldNode = first;
+        // 头节点特殊处理
+        if(index == 0){
+            first = first.next;
+        }{
+            Node<E> node = node(index - 1);
+            oldNode = node.next;
+            node.next = node.next.next;
+
+        }
+        size--;
+        return oldNode.element;
     }
 
     @Override
     public int indexOf(E element) {
         return 0;
+    }
+
+    /**
+     * 获取index位置的节点对象
+     * @param index  索引位置
+     * @return  索引位置的节点对象
+     */
+    private Node<E> node(int index){
+
+        rangeCheck(index);
+        Node<E> node = first;
+        for (int i = 0; i < index; i++) {
+            node = node.next;
+        }
+        return node;
     }
 }
