@@ -9,6 +9,9 @@ package com.jiajia.study.array;
 
 
 public interface List<E> {
+    /**
+     * 索引未找到，默认返回 -1
+     */
     static final int ELEMENT_NOT_FOUND = -1;
     /**
      * 清除所有元素

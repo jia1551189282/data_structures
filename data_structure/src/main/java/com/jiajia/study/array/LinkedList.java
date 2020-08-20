@@ -77,7 +77,23 @@ public class LinkedList<E> extends AbstractList<E> {
 
     @Override
     public int indexOf(E element) {
-        return 0;
+        Node<E> node = first;
+        if(element == null){
+            for (int i = 0; i < size; i++) {
+                if(node.element == null){
+                    return i;
+                }
+                node = node.next;
+            }
+        }else {
+            for (int i = 0; i < size; i++) {
+                if (node.element == element){
+                    return i;
+                }
+                node =node.next;
+            }
+        }
+        return ELEMENT_NOT_FOUND;
     }
 
     /**
