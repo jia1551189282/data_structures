@@ -24,6 +24,14 @@ public class LinkedList<E> extends AbstractList<E> {
             this.element = element;
             this.next = next;
         }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "element=" + element +
+                    ", next=" + next +
+                    '}';
+        }
     }
 
     @Override
@@ -48,9 +56,10 @@ public class LinkedList<E> extends AbstractList<E> {
 
     @Override
     public void add(int index, E element) {
+        rangeCheckForAdd(index);
         // 头节点 特殊处理
         if(index == 0){
-            first = new Node<E>(element,first.next);
+            first = new Node<E>(element,first);
         }else{
             Node<E> preNode = node(index - 1);
             Node<E> node = new Node<>(element,preNode.next);
@@ -61,6 +70,7 @@ public class LinkedList<E> extends AbstractList<E> {
 
     @Override
     public E remove(int index) {
+        rangeCheck(index);
         Node<E> oldNode = first;
         // 头节点特殊处理
         if(index == 0){
@@ -109,5 +119,13 @@ public class LinkedList<E> extends AbstractList<E> {
             node = node.next;
         }
         return node;
+    }
+
+    @Override
+    public String toString() {
+        return "LinkedList{" +
+                "first=" + first +
+                ", size=" + size +
+                '}';
     }
 }
